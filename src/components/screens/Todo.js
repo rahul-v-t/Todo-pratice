@@ -4,6 +4,8 @@ import Add from "../assets/plus.svg";
 import Tick from "../assets/tick-green.svg";
 import Revert from "../assets/revert.svg";
 import styled from "styled-components";
+import { Button } from 'antd';
+import 'antd/dist/antd.css';
 
 export default function Todo() {
     const[items, setItems] = useState([]);
@@ -53,7 +55,7 @@ export default function Todo() {
                 <Form>
                     <Img src={Add} />
                     <Input value={input} onChange={(e)=>setInput(e.target.value)} placeholder="Add New Task" />
-                    <Button onClick={addItems} >Add New</Button>
+                    <But onClick={addItems} >Add New</But>
                 </Form>
             </Items>
             <Head>Completed</Head>
@@ -63,6 +65,7 @@ export default function Todo() {
                                 removeItem(completed.id);}} /> <img src={Delete} onClick={() => removeItem(completed.id)} /></div> </Elements>
                 ))}
             </List>
+            <Button type="primary">Primary Button</Button>
         </Box>
         </>
     )
@@ -128,7 +131,7 @@ const Input = styled.input`
         outline: none;
     }
     margin-left: 20px;`;
-const Button = styled.button`
+const But = styled.button`
     width:25%;
     font-family: "baloo_paaji_2regular";
     color:#ffffff;
