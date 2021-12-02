@@ -7,6 +7,9 @@ import styled from "styled-components";
 import { Layout, Menu, Breadcrumb,Button } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+
 
 export default function Todo() {
     const { SubMenu } = Menu;
@@ -15,6 +18,15 @@ export default function Todo() {
     const [input, setInput] = useState("");
     const [newId,setNewId] = useState(1)
     const [complete, setComplete]=useState([]);
+    const options = {
+        series: [
+            {
+                name: 'Profit',
+                data: [100,200,30,100,30,50,100]
+            }
+        ]
+    };
+    
 
     let addItems = (e) =>{
         e.preventDefault();
@@ -119,13 +131,13 @@ export default function Todo() {
                                 removeItem(completed.id);}} /> <img src={Delete} onClick={() => removeItem(completed.id)} /></div> </Elements>
                 ))}
             </List>
-            
+           
         </Box>
         </Content>
       </Layout>
     </Layout>
   </Layout>
-        
+  <HighchartsReact highcharts={Highcharts} options={options} />      
         </>
     )
 }
