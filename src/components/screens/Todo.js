@@ -16,8 +16,15 @@ export default function Todo() {
     const { Header, Content, Sider } = Layout;
     const[items, setItems] = useState([]);
     const [input, setInput] = useState("");
-    const [newId,setNewId] = useState(1)
+    const [newId,setNewId] = useState(1);
     const [complete, setComplete]=useState([]);
+    const [count, setCount] = useState(0);
+    const increment = () => {
+        setCount(count+1);
+    };
+    const decrement = () => {
+        setCount(count-1);
+    };
     const options = {
         series: [
             {
@@ -58,86 +65,90 @@ export default function Todo() {
     return (
         <>
         <Layout>
-    <Header className="header">
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
-      </Menu>
-    </Header>
-    <Layout>
-      <Sider width={200} className="site-layout-background">
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-            <Menu.Item key="1">option1</Menu.Item>
-            <Menu.Item key="2">option2</Menu.Item>
-            <Menu.Item key="3">option3</Menu.Item>
-            <Menu.Item key="4">option4</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-            <Menu.Item key="5">option5</Menu.Item>
-            <Menu.Item key="6">option6</Menu.Item>
-            <Menu.Item key="7">option7</Menu.Item>
-            <Menu.Item key="8">option8</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-            <Menu.Item key="9">option9</Menu.Item>
-            <Menu.Item key="10">option10</Menu.Item>
-            <Menu.Item key="11">option11</Menu.Item>
-            <Menu.Item key="12">option12</Menu.Item>
-          </SubMenu>
-        </Menu>
-      </Sider>
-      <Layout style={{ padding: '0 24px 24px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-          }}
-        >
-          <Box>
-            <Heading>Todo List</Heading>
-            <Head>Things To Be Done</Head>
-            <List>
-                {items.map((item)=>(
-                            <Element key={item.id} > <Div><Round onClick={() => {completedItem(item.id,item.name);
-                                handleRemoveItem(item.id);}} ></Round>  {item.id}, {item.name} </Div> <img src={Delete} onClick={() => handleRemoveItem(item.id)} /> </Element>
-                ))}
-            </List>
-            <Items>
-                <Form>
-                    <Img src={Add} />
-                    <Input value={input} onChange={(e)=>setInput(e.target.value)} placeholder="Add New Task" />
-                    <Button type="primary" onClick={addItems}>Add New</Button>
-                </Form>
-            </Items>
-            <Head>Completed</Head>
-            <List>
-                {complete.map((completed)=>(
-                            <Elements key={completed.id} > <Div><Rounded><Ticked src={Tick} /></Rounded>  {completed.id}, {completed.name} </Div> <div><img src={Revert}  onClick={() => {revertedItem(completed.id,completed.name);
-                                removeItem(completed.id);}} /> <img src={Delete} onClick={() => removeItem(completed.id)} /></div> </Elements>
-                ))}
-            </List>
-           
-        </Box>
-        </Content>
-      </Layout>
-    </Layout>
-  </Layout>
-  <HighchartsReact highcharts={Highcharts} options={options} />      
+            <Header className="header">
+            <div className="logo" />
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                <Menu.Item key="1">nav 1</Menu.Item>
+                <Menu.Item key="2">nav 2</Menu.Item>
+                <Menu.Item key="3">nav 3</Menu.Item>
+            </Menu>
+            </Header>
+            <Layout>
+                <Sider width={200} className="site-layout-background">
+                    <Menu
+                    mode="inline"
+                    defaultSelectedKeys={['1']}
+                    defaultOpenKeys={['sub1']}
+                    style={{ height: '100%', borderRight: 0 }}
+                    >
+                    <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
+                        <Menu.Item key="1">option1</Menu.Item>
+                        <Menu.Item key="2">option2</Menu.Item>
+                        <Menu.Item key="3">option3</Menu.Item>
+                        <Menu.Item key="4">option4</Menu.Item>
+                    </SubMenu>
+                    <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
+                        <Menu.Item key="5">option5</Menu.Item>
+                        <Menu.Item key="6">option6</Menu.Item>
+                        <Menu.Item key="7">option7</Menu.Item>
+                        <Menu.Item key="8">option8</Menu.Item>
+                    </SubMenu>
+                    <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
+                        <Menu.Item key="9">option9</Menu.Item>
+                        <Menu.Item key="10">option10</Menu.Item>
+                        <Menu.Item key="11">option11</Menu.Item>
+                        <Menu.Item key="12">option12</Menu.Item>
+                    </SubMenu>
+                    </Menu>
+                </Sider>
+                    <Layout style={{ padding: '0 24px 24px' }}>
+                        <Breadcrumb style={{ margin: '16px 0' }}>
+                        <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>List</Breadcrumb.Item>
+                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                        </Breadcrumb>
+                        <Content
+                        className="site-layout-background"
+                        style={{
+                            padding: 24,
+                            margin: 0,
+                            minHeight: 280,
+                        }}
+                        >
+                        <Box>
+                            <Heading>Todo List</Heading>
+                            <Head>Things To Be Done</Head>
+                            <List>
+                                {items.map((item)=>(
+                                            <Element key={item.id} > <Div><Round onClick={() => {completedItem(item.id,item.name);
+                                                handleRemoveItem(item.id);}} ></Round>  {item.id}, {item.name} </Div> <img src={Delete} onClick={() => handleRemoveItem(item.id)} /> </Element>
+                                ))}
+                            </List>
+                            <Items>
+                                <Form>
+                                    <Img src={Add} />
+                                    <Input value={input} onChange={(e)=>setInput(e.target.value)} placeholder="Add New Task" />
+                                    <Button type="primary" onClick={addItems}>Add New</Button>
+                                </Form>
+                            </Items>
+                            <Head>Completed</Head>
+                            <List>
+                                {complete.map((completed)=>(
+                                            <Elements key={completed.id} > <Div><Rounded><Ticked src={Tick} /></Rounded>  {completed.id}, {completed.name} </Div> <div><img src={Revert}  onClick={() => {revertedItem(completed.id,completed.name);
+                                                removeItem(completed.id);}} /> <img src={Delete} onClick={() => removeItem(completed.id)} /></div> </Elements>
+                                ))}
+                            </List>
+                        
+                        </Box>
+                        </Content>
+                    </Layout>
+                </Layout>
+            </Layout>
+            <HighchartsReact highcharts={Highcharts} options={options} />  
+            <div> <h3> {count}</h3> 
+                <button onClick = {increment}>Increment</button>   
+                <button onClick = {decrement}>Decrement</button>                         
+            </div>    
         </>
     )
 }
